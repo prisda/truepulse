@@ -1,4 +1,4 @@
-const ORIGIN = 'https://truepulse.netlify.app'; // Replace with your Lovable origin domain
+const ORIGIN = 'https://app.truepulse.io'; // Replace with your Lovable origin domain
 
 export default {
   async fetch(request, env, ctx) {
