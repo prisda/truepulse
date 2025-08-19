@@ -4,7 +4,7 @@
 // - Proxies Supabase Edge Functions via same-origin paths (/functions/v1/*) so cookies can be set/read on *.truepulse.io
 //   This fixes cross-domain cookie issues when authenticating via Supabase functions.
 
-const ORIGIN = 'truepulse-mbgriy4wc-poms-projects-b348c3fa.vercel.app'; // Vercel deployment URL
+const ORIGIN = 'https://:truepulse-mbgriy4wc-poms-projects-b348c3fa.vercel.app'; // Vercel deployment URL
 //const ORIGIN = 'https://truepulse-amber.vercel.app'; // Vercel deployment URL
 const SUPABASE_FUNCTIONS_BASE = 'https://sqfkemrgfhwdplpqdqhz.supabase.co'; // Supabase project base
 
