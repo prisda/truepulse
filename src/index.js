@@ -30,8 +30,9 @@ function extractTenant(hostname) {
   // Get subdomain (first part)
   const subdomain = parts[0];
   
-  // Check if apex domain
+  // Check if apex domain - www.truepulse.io is treated as apex for authentication
   const isApex = subdomain === 'truepulse' || 
+                subdomain === 'www' ||
                 APEX_DOMAINS.includes(subdomain) || 
                 parts.length < 3;
   
