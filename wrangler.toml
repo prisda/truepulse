@@ -1,4 +1,4 @@
-name = "truepulse-worker"
+name = "truepulse"
 main = "src/index.js"
 compatibility_date = "2025-08-14"
 
