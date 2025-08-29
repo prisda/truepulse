@@ -189,20 +189,14 @@ async function proxySupabaseFunction(request) {
   // Execute upstream call to Supabase function
   const upstream = await fetch(targetUrl.toString(), init);
 
-  // Create a fresh Response, preserving status and body
-  const resHeaders = new Headers(upstream.headers);
+  // IMPORTANT: preserve upstream response object to retain multiple Set-Cookie headers intact
+  // Creating a new Headers(...) can collapse duplicate Set-Cookie values, causing browsers to ignore them.
+  const response = new Response(upstream.body, upstream);
 
-  // Because this response is same-origin to the browser (*.truepulse.io), any Set-Cookie coming back from Supabase
-  // (e.g. "truepulse-auth=...; Domain=.truepulse.io; ...") will now be accepted by the browser.
-  // We simply forward headers as-is. If multiple Set-Cookie headers exist, Cloudflare will preserve them.
-  // Optionally, we can enforce same-origin CORS (unnecessary for same-origin calls).
-  resHeaders.delete('content-length'); // avoid mismatched length after streaming
+  // Avoid mismatched length after streaming
+  response.headers.delete('content-length');
 
-  return new Response(upstream.body, {
-    status: upstream.status,
-    statusText: upstream.statusText,
-    headers: resHeaders
-  });
+  return response;
 }
 
 async function proxyOrigin(request) {
